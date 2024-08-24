@@ -1,5 +1,16 @@
-import { render } from 'preact'
-import { App } from './app.tsx'
-import './index.css'
+import { render } from "preact";
 
-render(<App />, document.getElementById('app')!)
+import FontStyles from "./styles/fontStyles.ts";
+import GlobalStyles from "./styles/global.ts";
+import { StrictMode } from "react";
+
+import { App } from "./app.tsx";
+
+render(
+  <StrictMode>
+    <FontStyles />
+    <App />
+    <GlobalStyles />
+  </StrictMode>,
+  document.getElementById("app")!
+);
