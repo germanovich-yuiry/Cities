@@ -1,46 +1,44 @@
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
-import { City } from "../types/City";
+import { City } from "../types/CityDTO";
 
-class CityStore {
-  apiToken = "";
-  searchQuery = "";
+class CitiesStore {
   cities: City[] = [];
-  error = "";
+  errorMessage = "";
+  isError = false;
   loading = false;
+  idle = true;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setSearchQuery(query: string) {
-    this.searchQuery = query;
-  }
-
-  async loadCities() {
+  async loadCities(query: string) {
     try {
       this.loading = true;
-      this.error = "";
+      this.isError = false;
+      this.errorMessage = "";
 
       const response = await axios.get(
         `https://api.vk.com/method/database.getCities`,
         {
           params: {
-            access_token: this.apiToken,
+            access_token: "",
             v: "5.131",
-            query: this.searchQuery,
+            query: query,
           },
         }
       );
 
       this.cities = response.data.response.items;
     } catch (error) {
-      this.error = "Ошибка при загрузке данных: " + error.message;
+      this.errorMessage = "Ошибка при загрузке данных: " + error.message;
+      this.isError = true;
     } finally {
       this.loading = false;
     }
   }
 }
 
-const store = new CityStore();
+const store = new CitiesStore();
 export const useStore = () => store;
