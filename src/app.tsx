@@ -9,15 +9,14 @@ import { useCities } from "./stores/CitiesStore";
 
 const Container = styled.div`
   min-width: 360px;
-  max-width: 1980px;
+  max-width: 480px;
   min-height: 100vh;
   margin: 0 auto;
-  padding-top: 32px;
-  background-color: white;
+  padding: 36px 20px 20px 20px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   font-family: "Regular";
 `;
 
