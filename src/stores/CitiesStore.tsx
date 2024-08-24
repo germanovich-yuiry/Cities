@@ -41,4 +41,5 @@ class CitiesStore {
 }
 
 const store = new CitiesStore();
+export const useCities = () => store.cities;
 export const useStore = () => store;
