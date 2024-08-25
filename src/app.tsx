@@ -25,12 +25,13 @@ const Container = styled.div`
 const App: FC = observer(() => {
   const cities = useCities();
   const token = useStore().apiKey;
+  const query = useStore().query;
 
   return (
     <Container>
       <TokenInput />
       <SearchInput disabled={!!token} />
-      <CityTable cities={cities} />
+      <CityTable cities={cities} searchText={query} />
     </Container>
   );
 });

@@ -5,8 +5,8 @@ import { City } from "../types/CityDTO";
 import cities from "../mockData";
 
 class CitiesStore {
+  query: string = "";
   cities: City[] = [];
-
   errorMessage = "";
   isError = false;
   loading = false;
@@ -20,6 +20,10 @@ class CitiesStore {
   setApiKey(key: string) {
     this.apiKey = key;
     console.log(key);
+  }
+
+  setQuery(query: string) {
+    this.query = query;
   }
 
   async loadCities(query: string) {

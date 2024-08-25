@@ -11,7 +11,9 @@ const SearchInput: FC<{ disabled: boolean }> = observer(() => {
   const store = useStore();
 
   const handleChange = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-    store.loadCities((e.target as HTMLInputElement).value);
+    const query = (e.target as HTMLInputElement).value;
+    store.setQuery(query);
+    store.loadCities(query);
   }, 300);
 
   const StyledInput = styled.input`
