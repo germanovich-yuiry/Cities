@@ -44,7 +44,6 @@ class CitiesStore {
       // );
 
       this.cities = cities.response.items;
-      console.log(this.cities);
     } catch (error) {
       this.errorMessage = "Ошибка при загрузке данных: " + error.message;
       this.isError = true;

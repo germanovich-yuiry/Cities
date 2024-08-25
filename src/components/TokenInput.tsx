@@ -24,6 +24,8 @@ const TokenInput: FC = observer(() => {
     &::placeholder {
       color: red;
     }
+    background-color: black;
+    color: lightgreen;
   `;
 
   return (
