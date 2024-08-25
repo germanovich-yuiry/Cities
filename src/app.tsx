@@ -1,11 +1,13 @@
-import React from "react";
+import { FC } from "preact/compat";
 
 import styled from "styled-components";
+
 import SearchInput from "./components/SearchInput";
+import TokenInput from "./components/TokenInput";
 import CityTable from "./components/CityTable";
 
 import { observer } from "mobx-react-lite";
-import { useCities } from "./stores/CitiesStore";
+import { useCities, useStore } from "./stores/CitiesStore";
 
 const Container = styled.div`
   min-width: 360px;
@@ -20,11 +22,14 @@ const Container = styled.div`
   font-family: "Regular";
 `;
 
-const App: React.FC = observer(() => {
+const App: FC = observer(() => {
   const cities = useCities();
+  const token = useStore().apiKey;
+
   return (
     <Container>
-      <SearchInput />
+      <TokenInput />
+      <SearchInput disabled={!!token} />
       <CityTable cities={cities} />
     </Container>
   );

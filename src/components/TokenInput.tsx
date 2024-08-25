@@ -1,17 +1,16 @@
 import { FC } from "preact/compat";
 
 import styled from "styled-components";
-
 import debounce from "../utils/debounce";
 
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/CitiesStore";
 
-const SearchInput: FC<{ disabled: boolean }> = observer(() => {
+const TokenInput: FC = observer(() => {
   const store = useStore();
 
   const handleChange = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-    store.loadCities((e.target as HTMLInputElement).value);
+    store.setApiKey((e.target as HTMLInputElement).value);
   }, 300);
 
   const StyledInput = styled.input`
@@ -22,19 +21,18 @@ const SearchInput: FC<{ disabled: boolean }> = observer(() => {
     border: 1px solid lightblue;
     margin-bottom: 20px;
 
-    &:: placeholder {
-      color: gray;
+    &::placeholder {
+      color: red;
     }
   `;
 
   return (
     <StyledInput
-      disabled={store.apiKey === ""}
       type="text"
       onChange={handleChange}
-      placeholder="Введите запрос для поиска"
+      placeholder="Введите токен доступа!"
     />
   );
 });
 
-export default SearchInput;
+export default TokenInput;

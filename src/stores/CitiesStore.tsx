@@ -1,16 +1,25 @@
 import { makeAutoObservable } from "mobx";
-import axios from "axios";
+
 import { City } from "../types/CityDTO";
+
+import cities from "../mockData";
 
 class CitiesStore {
   cities: City[] = [];
+
   errorMessage = "";
   isError = false;
   loading = false;
   idle = true;
+  apiKey = "";
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  setApiKey(key: string) {
+    this.apiKey = key;
+    console.log(key);
   }
 
   async loadCities(query: string) {
@@ -19,18 +28,19 @@ class CitiesStore {
       this.isError = false;
       this.errorMessage = "";
 
-      const response = await axios.get(
-        `https://api.vk.com/method/database.getCities`,
-        {
-          params: {
-            access_token: "",
-            v: "5.131",
-            query: query,
-          },
-        }
-      );
+      // let response = await axios.get(
+      //   `http://api.vk.com/method/database.getCities`,
+      //   {
+      //     params: {
+      //       access_token: this.apiKey,
+      //       v: "5.199",
+      //       q: query,
+      //     },
+      //   }
+      // );
 
-      this.cities = response.data.response.items;
+      this.cities = cities.response.items;
+      console.log(this.cities);
     } catch (error) {
       this.errorMessage = "Ошибка при загрузке данных: " + error.message;
       this.isError = true;
